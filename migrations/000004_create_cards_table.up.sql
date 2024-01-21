@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS "cards"(
+    "id" SERIAL PRIMARY KEY,
+    "title" VARCHAR(255) NOT NULL,
+    "description" VARCHAR(255) NOT NULL,
+    "user_ids" INTEGER[] NOT NULL,
+    "deadline" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
+    "order_number" BIGINT NOT NULL,
+    "board_id" BIGINT NOT NULL,
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" TIMESTAMP
+);

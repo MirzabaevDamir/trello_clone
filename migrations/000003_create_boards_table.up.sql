@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS "boards"(
+    "id" SERIAL PRIMARY KEY,
+    "title" VARCHAR(255) NOT NULL,
+    "order_number" BIGINT NOT NULL,
+    "work_space_id" BIGINT NOT NULL,
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" TIMESTAMP
+);
+

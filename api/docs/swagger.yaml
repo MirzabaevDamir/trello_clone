@@ -1,0 +1,797 @@
+basePath: /v1
+definitions:
+  models.BoardApiFindResponse:
+    properties:
+      body:
+        $ref: '#/definitions/models.BoardFindResponse'
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  models.BoardApiResponse:
+    properties:
+      body:
+        $ref: '#/definitions/models.BoardResponse'
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  models.BoardCreateReq:
+    properties:
+      order_number:
+        type: integer
+      title:
+        type: string
+      work_space_id:
+        type: integer
+    type: object
+  models.BoardFindResponse:
+    properties:
+      boards:
+        items:
+          $ref: '#/definitions/models.BoardResponse'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.BoardResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      order_number:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+      work_space_id:
+        type: integer
+    type: object
+  models.BoardUpdateReq:
+    properties:
+      id:
+        type: integer
+      order_number:
+        type: integer
+      title:
+        type: string
+      work_space_id:
+        type: integer
+    type: object
+  models.CardApiFindResponse:
+    properties:
+      body:
+        $ref: '#/definitions/models.CardFindResponse'
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  models.CardApiResponse:
+    properties:
+      body:
+        $ref: '#/definitions/models.CardResponse'
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  models.CardCreateReq:
+    properties:
+      board_id:
+        type: integer
+      deadline:
+        type: string
+      description:
+        type: string
+      order_number:
+        type: integer
+      title:
+        type: string
+      user_ids:
+        items:
+          type: integer
+        type: array
+    type: object
+  models.CardFindResponse:
+    properties:
+      cards:
+        items:
+          $ref: '#/definitions/models.CardResponse'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.CardResponse:
+    properties:
+      board_id:
+        type: integer
+      created_at:
+        type: string
+      deadline:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      order_number:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_ids:
+        items:
+          type: integer
+        type: array
+    type: object
+  models.CardUpdateReq:
+    properties:
+      board_id:
+        type: integer
+      deadline:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      order_number:
+        type: integer
+      title:
+        type: string
+      user_ids:
+        items:
+          type: integer
+        type: array
+    type: object
+  models.DefaultResponse:
+    properties:
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  models.UserApiFindResponse:
+    properties:
+      body:
+        $ref: '#/definitions/models.UserFindResponse'
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  models.UserApiResponse:
+    properties:
+      body:
+        $ref: '#/definitions/models.UserResponse'
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  models.UserCreateReq:
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.UserFindResponse:
+    properties:
+      count:
+        type: integer
+      users:
+        items:
+          $ref: '#/definitions/models.UserResponse'
+        type: array
+    type: object
+  models.UserResponse:
+    properties:
+      created_at:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  models.UserUpdateReq:
+    properties:
+      first_name:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.WorkspaceApiFindResponse:
+    properties:
+      body:
+        $ref: '#/definitions/models.WorkspaceFindResponse'
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  models.WorkspaceApiResponse:
+    properties:
+      body:
+        $ref: '#/definitions/models.WorkspaceResponse'
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  models.WorkspaceCreateReq:
+    properties:
+      owner_id:
+        type: integer
+      title:
+        type: string
+    type: object
+  models.WorkspaceFindResponse:
+    properties:
+      count:
+        type: integer
+      workspaces:
+        items:
+          $ref: '#/definitions/models.WorkspaceResponse'
+        type: array
+    type: object
+  models.WorkspaceResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      owner_id:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.WorkspaceUpdateReq:
+    properties:
+      id:
+        type: integer
+      owner_id:
+        type: integer
+      title:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Here QA can test and frontend or mobile developers can get information
+    of API endpoints.
+  title: Trello project API Endpoints
+  version: "1.0"
+paths:
+  /board:
+    post:
+      consumes:
+      - application/json
+      description: Here board can be created.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.BoardCreateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BoardApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Create board
+      tags:
+      - Board
+    put:
+      consumes:
+      - application/json
+      description: Here board can be updated.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.BoardUpdateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BoardApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Update board
+      tags:
+      - Board
+  /board/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Here board can be deleted.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Delete board
+      tags:
+      - Board
+    get:
+      consumes:
+      - application/json
+      description: Here board can be got.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BoardApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Get board by key
+      tags:
+      - Board
+  /board/list:
+    get:
+      consumes:
+      - application/json
+      description: Here all boards can be got.
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BoardApiFindResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Get boards list
+      tags:
+      - Board
+  /card:
+    post:
+      consumes:
+      - application/json
+      description: Here card can be created.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.CardCreateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CardApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Create card
+      tags:
+      - Card
+    put:
+      consumes:
+      - application/json
+      description: Here card can be updated.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.CardUpdateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CardApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Update card
+      tags:
+      - Card
+  /card/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Here card can be deleted.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Delete card
+      tags:
+      - Card
+    get:
+      consumes:
+      - application/json
+      description: Here card can be got.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CardApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Get card by key
+      tags:
+      - Card
+  /card/list:
+    get:
+      consumes:
+      - application/json
+      description: Here all cards can be got.
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CardApiFindResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Get cards list
+      tags:
+      - Card
+  /user:
+    post:
+      consumes:
+      - application/json
+      description: Here user can be created.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserCreateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Create user
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Here user can be updated.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserUpdateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Update user
+      tags:
+      - User
+  /user/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Here user can be deleted.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Delete user
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      description: Here user can be got.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Get user by key
+      tags:
+      - User
+  /user/list:
+    get:
+      consumes:
+      - application/json
+      description: Here all users can be got.
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: page
+        type: integer
+      - in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserApiFindResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Get users list
+      tags:
+      - User
+  /work_space:
+    post:
+      consumes:
+      - application/json
+      description: Here workSpace can be created.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.WorkspaceCreateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.WorkspaceApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Create workSpace
+      tags:
+      - WorkSpace
+    put:
+      consumes:
+      - application/json
+      description: Here workSpace can be updated.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/models.WorkspaceUpdateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.WorkspaceApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Update workSpace
+      tags:
+      - WorkSpace
+  /work_space/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Here workSpace can be deleted.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Delete workSpace
+      tags:
+      - WorkSpace
+    get:
+      consumes:
+      - application/json
+      description: Here workSpace can be got.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.WorkspaceApiResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Get workSpace by key
+      tags:
+      - WorkSpace
+  /work_space/list:
+    get:
+      consumes:
+      - application/json
+      description: Here all workSpaces can be got.
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.WorkspaceApiFindResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.DefaultResponse'
+      summary: Get workSpaces list
+      tags:
+      - WorkSpace
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"
